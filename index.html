@@ -11,29 +11,6 @@
     <meta name="generator" content="Astro v5.9.2" />
     <title>Home</title>
     <!-- Google Tag Manager -->
-    <script>
-      function loadGoogleAnalytics() {
-        // Código do Google Analytics só é carregado se o usuário aceitar
-        const scriptTag = document.createElement("script");
-        scriptTag.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
-        scriptTag.async = true;
-        document.head.appendChild(scriptTag);
-
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-          dataLayer.push(arguments);
-        }
-        window.gtag = gtag;
-        gtag("js", new Date());
-        gtag("config", "G-Q6WQTY63QH");
-      }
-
-      // Verifica se já houve consentimento
-      if (localStorage.getItem("cookies-aceitos")) {
-        loadGoogleAnalytics();
-      }
-    </script>
-
     <script async>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
@@ -969,5 +946,37 @@
       integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
       crossorigin="anonymous"
     ></script>
+    <script>
+      function loadGoogleAnalytics() {
+        const script = document.createElement("script");
+        script.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"; // Substitua pelo seu ID
+        script.async = true;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", "G-XXXXXXX");
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const banner = document.getElementById("cookie-banner");
+        const btn = document.getElementById("accept-cookies");
+
+        if (localStorage.getItem("cookies-aceitos")) {
+          banner.style.display = "none";
+          loadGoogleAnalytics();
+        }
+
+        btn.addEventListener("click", () => {
+          localStorage.setItem("cookies-aceitos", "true");
+          banner.style.display = "none"; // ← garante que o banner suma
+          loadGoogleAnalytics();
+        });
+      });
+    </script>
   </body>
 </html>
