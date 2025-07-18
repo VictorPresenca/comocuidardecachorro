@@ -12,6 +12,29 @@
     <title>Home</title>
     <!-- Google Tag Manager -->
     <script>
+      function loadGoogleAnalytics() {
+        // Código do Google Analytics só é carregado se o usuário aceitar
+        const scriptTag = document.createElement("script");
+        scriptTag.src = "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX";
+        scriptTag.async = true;
+        document.head.appendChild(scriptTag);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        window.gtag = gtag;
+        gtag("js", new Date());
+        gtag("config", "G-Q6WQTY63QH");
+      }
+
+      // Verifica se já houve consentimento
+      if (localStorage.getItem("cookies-aceitos")) {
+        loadGoogleAnalytics();
+      }
+    </script>
+
+    <script async>
       (function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
@@ -51,6 +74,30 @@
 
       gtag("config", "G-Q6WQTY63QH");
     </script>
+
+    <style>
+      #cookie-banner {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #f4f4f4;
+        color: #333;
+        padding: 15px;
+        text-align: center;
+        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+      }
+      #cookie-banner button {
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        margin-left: 15px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+    </style>
   </head>
   <body>
     <!-- começo -->
@@ -64,6 +111,13 @@
       ></iframe
     ></noscript>
     <!-- End Google Tag Manager (noscript) -->
+    <div id="cookie-banner">
+      Este site utiliza cookies para melhorar sua experiência. Ao continuar,
+      você concorda com a nossa
+      <a href="/politica-de-cookies.html" target="_blank">Política de Cookies</a
+      >.
+      <button id="accept-cookies">Aceitar</button>
+    </div>
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
       <symbol id="check2" viewBox="0 0 16 16">
         <path
